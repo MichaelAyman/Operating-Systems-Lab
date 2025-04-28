@@ -39,6 +39,7 @@ struct proc {
   pde_t* pgdir;                // Page table
   char *kstack;                // Bottom of kernel stack for this process
   enum procstate state;        // Process state
+  int priority;                //process priority
   int pid;  			// Process ID
   int pgid;			// Process Group ID
   struct proc *parent;         // Parent process
