@@ -112,6 +112,7 @@ found:
   memset(p->context, 0, sizeof *p->context);
   p->context->eip = (uint)forkret;
   p->pgid = p->pid;
+  p->pr = 50;
   return p;
 }
 
@@ -533,3 +534,39 @@ procdump(void)
   }
 }
 
+int
+setpriority(int pid, int pr) {
+  //check if pr is valid. Assume priority is 0-100.
+  if (pr < 0 || pr > 100) {
+    return -1; // error
+  }
+  // need to find all processes in ptable
+  int exists = -1;
+  
+  //we need to lock the table first, since it's shared
+  acquire(&ptable.lock);
+
+  struct proc *current = ptable.proc;
+
+  while (current < &ptable.proc[NPROC]) {
+    if (current->pid == pid) {
+      // match! Goal: change the pr of current
+      exists = current->pr; // save
+      current->pr = pr; // change
+      break;
+    }
+    current++;
+  }
+
+  //unlock
+  release(&ptable.lock);
+  return exists;
+
+}
+
+/*
+struct {
+  struct spinlock lock;
+  struct proc proc[NPROC];
+} ptable;
+*/

@@ -1,1 +1,1 @@
-bubblesort.o: bubblesort.c /usr/include/stdc-predef.h types.h user.h
+bubblesort.o: bubblesort.c types.h user.h

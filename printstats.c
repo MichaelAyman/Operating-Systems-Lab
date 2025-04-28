@@ -37,7 +37,11 @@ int std(int *arr, int n) {
 }
 
 int min(int *arr, int n) {
-    int mini = arr[0];
+    if (n <= 0) return 0;
+    int mini = 0;
+    if (arr != 0) {
+      mini = arr[0];
+    }
   
     for (int i = 1; i < n; i++) {
       if (arr[i] < mini) {
@@ -49,6 +53,7 @@ int min(int *arr, int n) {
 }
 
 int max(int *arr, int n) {
+    if (n <= 0) return 0;
     int maxi = arr[0];
   
     for (int i = 1; i < n; i++) {

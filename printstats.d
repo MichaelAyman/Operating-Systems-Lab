@@ -1,1 +1,1 @@
-printstats.o: printstats.c /usr/include/stdc-predef.h user.h types.h
+printstats.o: printstats.c user.h types.h

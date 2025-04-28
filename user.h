@@ -30,6 +30,7 @@ int getpgid(int);
 int setpgid(int);
 int getppid(void);
 int uptime_ms(void);
+int setpriority(int pid, int pr);
 // ulib.c
 int stat(const char*, struct stat*);
 char* strcpy(char*, const char*);

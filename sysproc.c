@@ -131,3 +131,17 @@ sys_uptime_ms(void) {
 	return (uint)(xticks *1000/100);
 }
 
+int
+sys_setpriority(void) {
+  int pid;
+  int pr;
+
+  // error checking
+
+  if (argint(0, &pid) < 0 || argint(1, &pr) < 0)
+    return -1;
+  
+  int res = setpriority(pid, pr);
+  return res;
+}
+

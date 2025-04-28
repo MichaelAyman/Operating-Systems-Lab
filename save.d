@@ -1,1 +1,1 @@
-save.o: save.c /usr/include/stdc-predef.h types.h stat.h user.h fcntl.h
+save.o: save.c types.h stat.h user.h fcntl.h

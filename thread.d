@@ -1,2 +1,1 @@
-thread.o: thread.c /usr/include/stdc-predef.h types.h stat.h user.h \
- fcntl.h
+thread.o: thread.c types.h stat.h user.h fcntl.h
