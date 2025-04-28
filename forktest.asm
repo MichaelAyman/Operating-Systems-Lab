@@ -52,11 +52,11 @@ main(void)
 {
   46:	83 ec 10             	sub    $0x10,%esp
   write(fd, s, strlen(s));
-  49:	68 e4 04 00 00       	push   $0x4e4
+  49:	68 f4 04 00 00       	push   $0x4f4
   4e:	e8 5d 01 00 00       	call   1b0 <strlen>
   53:	83 c4 0c             	add    $0xc,%esp
   56:	50                   	push   %eax
-  57:	68 e4 04 00 00       	push   $0x4e4
+  57:	68 f4 04 00 00       	push   $0x4f4
   5c:	6a 01                	push   $0x1
   5e:	e8 d9 03 00 00       	call   43c <write>
   63:	83 c4 10             	add    $0x10,%esp
@@ -91,11 +91,11 @@ main(void)
   a6:	75 49                	jne    f1 <forktest+0xb1>
   write(fd, s, strlen(s));
   a8:	83 ec 0c             	sub    $0xc,%esp
-  ab:	68 16 05 00 00       	push   $0x516
+  ab:	68 26 05 00 00       	push   $0x526
   b0:	e8 fb 00 00 00       	call   1b0 <strlen>
   b5:	83 c4 0c             	add    $0xc,%esp
   b8:	50                   	push   %eax
-  b9:	68 16 05 00 00       	push   $0x516
+  b9:	68 26 05 00 00       	push   $0x526
   be:	6a 01                	push   $0x1
   c0:	e8 77 03 00 00       	call   43c <write>
 }
@@ -106,11 +106,11 @@ main(void)
   ca:	e8 4d 03 00 00       	call   41c <exit>
   write(fd, s, strlen(s));
   cf:	83 ec 0c             	sub    $0xc,%esp
-  d2:	68 ef 04 00 00       	push   $0x4ef
+  d2:	68 ff 04 00 00       	push   $0x4ff
   d7:	e8 d4 00 00 00       	call   1b0 <strlen>
   dc:	83 c4 0c             	add    $0xc,%esp
   df:	50                   	push   %eax
-  e0:	68 ef 04 00 00       	push   $0x4ef
+  e0:	68 ff 04 00 00       	push   $0x4ff
   e5:	6a 01                	push   $0x1
   e7:	e8 50 03 00 00       	call   43c <write>
       exit();
@@ -118,7 +118,7 @@ main(void)
     printf(1, "wait got too many\n");
   f1:	52                   	push   %edx
   f2:	52                   	push   %edx
-  f3:	68 03 05 00 00       	push   $0x503
+  f3:	68 13 05 00 00       	push   $0x513
   f8:	6a 01                	push   $0x1
   fa:	e8 11 ff ff ff       	call   10 <printf>
     exit();
@@ -126,7 +126,7 @@ main(void)
     printf(1, "fork claimed to work N times!\n", N);
  104:	50                   	push   %eax
  105:	68 e8 03 00 00       	push   $0x3e8
- 10a:	68 24 05 00 00       	push   $0x524
+ 10a:	68 34 05 00 00       	push   $0x534
  10f:	6a 01                	push   $0x1
  111:	e8 fa fe ff ff       	call   10 <printf>
     exit();
@@ -607,7 +607,7 @@ float sqrt(int num) {
  3c8:	89 5d f4             	mov    %ebx,-0xc(%ebp)
  3cb:	b8 05 00 00 00       	mov    $0x5,%eax
  3d0:	db 45 f4             	fildl  -0xc(%ebp)
- 3d3:	d9 05 44 05 00 00    	flds   0x544
+ 3d3:	d9 05 54 05 00 00    	flds   0x554
  3d9:	eb 07                	jmp    3e2 <sqrt+0x72>
  3db:	8d 74 26 00          	lea    0x0(%esi,%eiz,1),%esi
  3df:	90                   	nop
@@ -624,7 +624,7 @@ float sqrt(int num) {
     solution = solution - eps;
  3ee:	dc ea                	fsubr  %st,%st(2)
     eps = eps / 10;
- 3f0:	d8 35 48 05 00 00    	fdivs  0x548
+ 3f0:	d8 35 58 05 00 00    	fdivs  0x558
   for (i = 0; i < 5; i++) {
  3f6:	83 e8 01             	sub    $0x1,%eax
  3f9:	75 e7                	jne    3e2 <sqrt+0x72>
@@ -809,3 +809,15 @@ SYSCALL(uptime_ms)
  4dc:	b8 1a 00 00 00       	mov    $0x1a,%eax
  4e1:	cd 40                	int    $0x40
  4e3:	c3                   	ret    
+
+000004e4 <printptable>:
+SYSCALL(printptable)
+ 4e4:	b8 1c 00 00 00       	mov    $0x1c,%eax
+ 4e9:	cd 40                	int    $0x40
+ 4eb:	c3                   	ret    
+
+000004ec <setpriority>:
+SYSCALL(setpriority)
+ 4ec:	b8 1b 00 00 00       	mov    $0x1b,%eax
+ 4f1:	cd 40                	int    $0x40
+ 4f3:	c3                   	ret    

@@ -25,3 +25,5 @@
 #define SYS_setpgid  24
 #define SYS_getppid  25
 #define SYS_uptime_ms  26
+#define SYS_setpriority 27
+#define SYS_printptable 28

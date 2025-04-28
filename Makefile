@@ -187,6 +187,8 @@ UPROGS=\
 	_thread\
 	_getppid_test\
 	_uptime_ms_test\
+	_printptable\
+	_setpriority\
 
 fs.img: mkfs README $(UPROGS)
 	./mkfs fs.img README $(UPROGS)

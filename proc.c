@@ -407,6 +407,8 @@ scheduler(void)
   }
 }
 */
+
+
 // Enter scheduler.  Must hold only ptable.lock
 // and have changed proc->state. Saves and restores
 // intena because intena is a property of this
@@ -584,4 +586,58 @@ procdump(void)
     cprintf("\n");
   }
 }
+
+void
+printptable(void)
+{
+  struct proc *p;
+  static char *states[] = {
+  [UNUSED]    "UNUSED",
+  [EMBRYO]    "EMBRYO",
+  [SLEEPING]  "SLEEPING",
+  [RUNNABLE]  "RUNNABLE",
+  [RUNNING]   "RUNNING",
+  [ZOMBIE]    "ZOMBIE"
+  };
+
+  acquire(&ptable.lock);
+  cprintf("Name\tPID\tState\t\tPriority\n");
+  for(p = ptable.proc; p < &ptable.proc[NPROC]; p++){
+    if(p->state == UNUSED)
+      continue;
+    cprintf("%s\t%d\t%s\t%d\n", p->name, p->pid, states[p->state], p->priority);
+  }
+  release(&ptable.lock);
+}
+int
+setpriority(int pid, int pr) {
+  //check if pr is valid. Assume priority is 0-100.
+  if (pr < 0 || pr > 100) {
+    return -1; // error
+  }
+  // need to find all processes in ptable
+  int exists = -1;
+  
+  //we need to lock the table first, since it's shared
+  acquire(&ptable.lock);
+
+  struct proc *current = ptable.proc;
+
+  while (current < &ptable.proc[NPROC]) {
+    if (current->pid == pid) {
+      // match! Goal: change the pr of current
+      exists = current->priority; // save
+      current->priority = pr; // change
+      break;
+    }
+    current++;
+  }
+
+  //unlock
+  release(&ptable.lock);
+  return exists;
+
+}
+
+
 

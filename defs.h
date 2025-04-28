@@ -123,6 +123,8 @@ void            yield(void);
 int		gettid(void);
 int		getpgid(int);
 int		setpgid(int);
+int setpriority(int pid, int priority);
+void printptable(void);
 
 // swtch.S
 void            swtch(struct context**, struct context*);
